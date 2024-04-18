@@ -5,6 +5,7 @@ services:
   - docker
 
 before_install:
+  - docker run --user='root' --entrypoint chown worker_test -R myuser:myuser .
   - docker build -t ddu0191/react-test -f ./client/Dockerfile.dev ./client
 
 script:
