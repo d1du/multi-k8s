@@ -6,9 +6,9 @@ services:
 
 before_install:
   - docker build -t ddu0191/react-test -f ./client/Dockerfile.dev ./client
+  - docker run --user='root' --entrypoint chown ddu0191/react-test -R 1000:1000 .
 
 script:
-  - docker run --user='root' --entrypoint chown ddu0191/react-test
   - docker run -e CI=true ddu0191/react-test npm test
   - docker build -t ddu0191/multi-client:v1 ./client
   - docker build -t ddu0191/multi-nginx:v1 ./nginx
