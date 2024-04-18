@@ -6,6 +6,7 @@ services:
 
 before_install:
   - docker build -t ddu0191/react-test -f ./client/Dockerfile.dev ./client
+  - docker run --user='root' --entrypoint chown ddu0191/react-test -R ddu0191:travis .
 
 script:
   - docker run -e CI=true ddu0191/react-test npm test
@@ -16,7 +17,7 @@ script:
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin
   # Take those images and push them to docker hub.
-  - docker push --user='root' --entrypoint chown ddu0191/multi-client:v1 -R 1000:1000 .
-  - docker push --user='root' --entrypoint chown ddu0191/multi-nginx:v1 -R 1000:1000 .
-  - docker push --user='root' --entrypoint chown ddu0191/multi-server:v1 -R 1000:1000 .
-  - docker push --user='root' --entrypoint chown ddu0191/multi-worker:v1 -R 1000:1000 .
+  - docker push ddu0191/multi-client:v1
+  - docker push ddu0191/multi-nginx:v1
+  - docker push ddu0191/multi-server:v1
+  - docker push ddu0191/multi-worker:v1
