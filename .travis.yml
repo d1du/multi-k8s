@@ -20,3 +20,15 @@ script:
   - sudo docker push ddu0191/multi-nginx:v1
   - sudo docker push ddu0191/multi-server:v1
   - sudo docker push ddu0191/multi-worker:v1
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-058264510926'
+  bucket_path: 'docker-multi'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
