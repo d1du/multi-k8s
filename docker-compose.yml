@@ -1,11 +1,11 @@
 version: "3"
 services:
   client:
-    image: "ddu0191/multi-client"
+    image: "ddu0191/multi-client:v1"
     mem_limit: 128m
     hostname: client
   server:
-    image: "ddu0191/multi-server"
+    image: "ddu0191/multi-server:v1"
     mem_limit: 128m
     hostname: api
     environment:
@@ -17,14 +17,14 @@ services:
       - PGPASSWORD=$PGPASSWORD
       - PGPORT=$PGPORT
   worker:
-    image: "ddu0191/multi-worker"
+    image: "ddu0191/multi-worker:v1"
     mem_limit: 128m
     hostname: worker
     environment:
       - REDIS_HOST=$REDIS_HOST
       - REDIS_PORT=$REDIS_PORT
   nginx:
-    image: "ddu0191/multi-nginx"
+    image: "ddu0191/multi-nginx:v1"
     mem_limit: 128m
     hostname: nginx
     ports:
